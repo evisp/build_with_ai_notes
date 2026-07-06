@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tirana Apartment Scout — Build Log</title>
+<meta name="description" content="A one-hour, terminal-and-Git build-along for Holberton summer school.">
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="470" cy="140" r="60"></circle>
+    <circle cx="470" cy="140" r="110"></circle>
+    <circle cx="470" cy="140" r="165"></circle>
+    <circle cx="470" cy="140" r="225"></circle>
+  </svg>
+
+  <div class="hero-content">
+    <p class="eyebrow">Holberton Summer School · Fundamentals Warm-up</p>
+    <h1>Tirana Apartment Scout</h1>
+    <p class="hero-sub">One hour. One tiny app. Terminal, Git, and an AI assistant doing the typing.</p>
+
+    <div class="hero-note">
+      <p><strong>How this page works —</strong> every step gives you a <em>goal</em> and a <em>requirement</em>, never the command itself. Try it from memory first. Only tap <strong>Reveal</strong> when you're stuck.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="phase-nav" aria-label="Phase navigation">
+  <a href="#phase-1"><span class="nav-index">01</span>Create &amp; Clone</a>
+  <a href="#phase-2"><span class="nav-index">02</span>Terminal Basics</a>
+  <a href="#phase-3"><span class="nav-index">03</span>First Commit</a>
+  <a href="#phase-4"><span class="nav-index">04</span>Feature: Listings</a>
+  <a href="#phase-5"><span class="nav-index">05</span>Feature: Filter</a>
+  <a href="#phase-6"><span class="nav-index">06</span>Feature: Deal Score</a>
+  <a href="#phase-7"><span class="nav-index">07</span>Wrap-up</a>
+</nav>
+
+<div class="progress-bar" role="group" aria-label="Session progress">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <p class="progress-label"><span id="progress-count">0</span> / 16 steps committed</p>
+</div>
+
+<main class="build-log">
+
+  <!-- ============ PHASE 1 ============ -->
+  <section class="phase" id="phase-1" data-phase="1">
+    <div class="phase-heading">
+      <span class="phase-index">01</span>
+      <div>
+        <h2>Create &amp; Clone</h2>
+        <p class="phase-intro">Give the project a home on GitHub before a single local file exists.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-1" data-step="1">
+      <div class="task-head">
+        <span class="step-dot">1</span>
+        <h3>Create your repository on GitHub</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="1">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Have a remote home for the project waiting before you touch a terminal.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A new, empty repository named <code>tirana-scout</code> exists on your GitHub account</li>
+            <li>No README, <code>.gitignore</code>, or license was added at creation</li>
+            <li>You have copied its HTTPS clone URL</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-1">Reveal the steps</button>
+      <div class="reveal-panel" id="reveal-1" hidden>
+        <p class="reveal-label">Do this</p>
+        <ol class="reveal-steps">
+          <li>Go to <code>github.com/new</code> in your browser</li>
+          <li>Name the repository <code>tirana-scout</code></li>
+          <li>Leave every checkbox unchecked — keep it empty</li>
+          <li>Click <strong>Create repository</strong>, then copy the HTTPS URL from the green <strong>Code</strong> button</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-2" data-step="2">
+      <div class="task-head">
+        <span class="step-dot">2</span>
+        <h3>Clone it to your machine</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="2">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn that empty remote repository into a connected local folder you can actually work in.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A local folder named <code>tirana-scout</code> exists on your machine</li>
+            <li>Running <code>git remote -v</code> inside it shows an <code>origin</code> pointing at your GitHub repo</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-2">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-2" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git clone &lt;your-repo-url&gt;
+cd tirana-scout</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 2 ============ -->
+  <section class="phase" id="phase-2" data-phase="2">
+    <div class="phase-heading">
+      <span class="phase-index">02</span>
+      <div>
+        <h2>Terminal Basics</h2>
+        <p class="phase-intro">Create files and check your surroundings — no file explorer allowed.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-3" data-step="3">
+      <div class="task-head">
+        <span class="step-dot">3</span>
+        <h3>Create your first files</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="3">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Practice creating files from the terminal instead of right-clicking in a file browser.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>app.py</code> and <code>README.md</code> exist inside <code>tirana-scout</code></li>
+            <li>Listing the folder's contents shows both files</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-3">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-3" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>touch app.py README.md
+ls -la</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-4" data-step="4">
+      <div class="task-head">
+        <span class="step-dot">4</span>
+        <h3>Confirm where you are</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="4">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get comfortable checking your location and peeking inside a file before running commands blindly.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>You can print the full path of your current folder</li>
+            <li>You can view the (empty) contents of <code>README.md</code> without opening an editor</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-4">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-4" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>pwd
+cat README.md</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 3 ============ -->
+  <section class="phase" id="phase-3" data-phase="3">
+    <div class="phase-heading">
+      <span class="phase-index">03</span>
+      <div>
+        <h2>First Commit &amp; Push</h2>
+        <p class="phase-intro">Turn two empty files into your first real snapshot of history.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-5" data-step="5">
+      <div class="task-head">
+        <span class="step-dot">5</span>
+        <h3>See what Git notices</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="5">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See how Git tracks new files before anything is committed.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Git reports both files as <strong>untracked</strong></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-5">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-5" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git status</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-6" data-step="6">
+      <div class="task-head">
+        <span class="step-dot">6</span>
+        <h3>Stage and commit</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="6">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn untracked files into your first permanent snapshot of project history.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git status</code> reports a clean working tree</li>
+            <li><code>git log</code> shows exactly one commit</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-6">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-6" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add .
+git commit -m "initial project structure"</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-7" data-step="7">
+      <div class="task-head">
+        <span class="step-dot">7</span>
+        <h3>Push to GitHub</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="7">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get your first commit off your machine and onto the remote you created in Phase 1.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Refreshing the repository page on GitHub shows <code>app.py</code> and <code>README.md</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-7">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-7" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git push origin main</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 4 ============ -->
+  <section class="phase" id="phase-4" data-phase="4">
+    <div class="phase-heading">
+      <span class="phase-index">04</span>
+      <div>
+        <h2>Feature: Listings</h2>
+        <p class="phase-intro">Your first feature — written by describing it, not by typing it.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-8" data-step="8">
+      <div class="task-head">
+        <span class="step-dot">8</span>
+        <h3>Ask your AI assistant for the first feature</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="8">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get working Python written for you by describing the outcome you want.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>app.py</code> holds a list of at least 5 apartment records (price, sqm, bedrooms)</li>
+            <li>A function prints them in a readable format</li>
+            <li>Running the file prints all 5 listings</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-8">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-8" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python function that stores 5 fake Tirana apartments as a list of dictionaries with price, sqm, and bedrooms, and a function that prints them in a readable format. Add a small block at the bottom that calls it."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 app.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-9" data-step="9">
+      <div class="task-head">
+        <span class="step-dot">9</span>
+        <h3>Save the checkpoint</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="9">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn this working feature into a point you can always return to.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a new commit for this feature</li>
+            <li>GitHub shows the updated <code>app.py</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-9">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-9" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add app.py
+git commit -m "add listings and print function"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 5 ============ -->
+  <section class="phase" id="phase-5" data-phase="5">
+    <div class="phase-heading">
+      <span class="phase-index">05</span>
+      <div>
+        <h2>Feature: Filter</h2>
+        <p class="phase-intro">Build on working code instead of starting over.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-10" data-step="10">
+      <div class="task-head">
+        <span class="step-dot">10</span>
+        <h3>Ask for a price filter</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="10">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Add a second feature by prompting again, on top of code that already works.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>app.py</code> has a function that filters listings under a given max price</li>
+            <li>Calling it with two different max prices gives two different results</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-10">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-10" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a function to my existing code that filters the apartment list to only show listings under a given max price. Call it with two different values and print both results."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 app.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-11" data-step="11">
+      <div class="task-head">
+        <span class="step-dot">11</span>
+        <h3>Commit and push again</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="11">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Build the habit — every working feature earns its own commit.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> now shows a commit mentioning the filter</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-11">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-11" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add app.py
+git commit -m "add price filter"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 6 ============ -->
+  <section class="phase" id="phase-6" data-phase="6">
+    <div class="phase-heading">
+      <span class="phase-index">06</span>
+      <div>
+        <h2>Feature: Deal Score</h2>
+        <p class="phase-intro">A small preview of the idea behind the real three-week project.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-12" data-step="12">
+      <div class="task-head">
+        <span class="step-dot">12</span>
+        <h3>Ask for a deal-scoring function</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="12">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Add the idea that mirrors what you'll build for real over the next three weeks: labeling listings as good or bad deals.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>app.py</code> computes price-per-square-meter for each listing</li>
+            <li>Each listing is labeled <strong>good deal</strong> or <strong>bad deal</strong> against the average</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-12">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-12" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a function that calculates price per square meter for each apartment, compares it to the average across all listings, and labels each one 'good deal' or 'bad deal'. Print the results."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 app.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-13" data-step="13">
+      <div class="task-head">
+        <span class="step-dot">13</span>
+        <h3>Lock in the last feature</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="13">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Commit the final feature of the build.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning deal scoring</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-13">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-13" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add app.py
+git commit -m "add deal scoring"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 7 ============ -->
+  <section class="phase" id="phase-7" data-phase="7">
+    <div class="phase-heading">
+      <span class="phase-index">07</span>
+      <div>
+        <h2>Wrap-up</h2>
+        <p class="phase-intro">Everything you just did is recorded, in order, forever.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-14" data-step="14">
+      <div class="task-head">
+        <span class="step-dot">14</span>
+        <h3>See your build as a timeline</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="14">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Look back at the whole hour as a single, ordered history.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Every commit from this session appears, in order, on one screen</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-14">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-14" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git log --oneline</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-15" data-step="15">
+      <div class="task-head">
+        <span class="step-dot">15</span>
+        <h3>Tag this milestone</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="15">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Mark this working version so anyone can return to exactly this state, later.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git tag</code> lists <code>v1.0</code></li>
+            <li>GitHub's repository page shows one tag</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-15">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-15" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git tag v1.0
+git push --tags</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card closing-card" id="step-16" data-step="16">
+      <div class="task-head">
+        <span class="step-dot">16</span>
+        <h3>Look at what you built</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="16">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Open your repository on GitHub and scroll through the commit history together. Sixteen small steps, a working script, and a real Git timeline — built by prompting, not typing. This is exactly the loop — <strong>prompt → run → commit → push</strong> — you'll repeat for the next three weeks on <em>Tirana Deal Finder</em>, just at a much bigger scale.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="closing-footer">
+  <p>Tirana Apartment Scout · built one commit at a time · Holberton School Summer Program</p>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
