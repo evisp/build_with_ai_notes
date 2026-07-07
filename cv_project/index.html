@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Personal CV — Build Log</title>
+<meta name="description" content="A one-hour, terminal-and-Git build-along for a personal CV site — Holberton summer school.">
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="470" cy="140" r="60"></circle>
+    <circle cx="470" cy="140" r="110"></circle>
+    <circle cx="470" cy="140" r="165"></circle>
+    <circle cx="470" cy="140" r="225"></circle>
+  </svg>
+
+  <div class="hero-content">
+    <p class="eyebrow">Holberton Summer School · Practice Project</p>
+    <h1>Your Personal CV</h1>
+    <p class="hero-sub">One hour. One real site — yours to keep, deploy, and actually use.</p>
+
+    <div class="hero-note">
+      <p><strong>How this page works —</strong> every step gives you a <em>goal</em> and a <em>requirement</em>, never the command itself. Try it from memory first. Only tap <strong>Reveal</strong> when you're stuck.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="phase-nav" aria-label="Phase navigation">
+  <a href="#phase-1"><span class="nav-index">01</span>Create &amp; Clone</a>
+  <a href="#phase-2"><span class="nav-index">02</span>HTML Skeleton</a>
+  <a href="#phase-3"><span class="nav-index">03</span>About &amp; Photo</a>
+  <a href="#phase-4"><span class="nav-index">04</span>Experience &amp; Education</a>
+  <a href="#phase-5"><span class="nav-index">05</span>Skills &amp; Contact</a>
+  <a href="#phase-6"><span class="nav-index">06</span>Style Pass</a>
+  <a href="#phase-7"><span class="nav-index">07</span>Deploy</a>
+  <a href="#stretch"><span class="nav-index">★</span>Stretch</a>
+</nav>
+
+<div class="progress-bar" role="group" aria-label="Session progress">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <p class="progress-label"><span id="progress-count">0</span> / 19 steps committed</p>
+</div>
+
+<main class="build-log">
+
+  <!-- ============ PHASE 1 ============ -->
+  <section class="phase" id="phase-1" data-phase="1">
+    <div class="phase-heading">
+      <span class="phase-index">01</span>
+      <div>
+        <h2>Create &amp; Clone</h2>
+        <p class="phase-intro">Give the project a home on GitHub before a single local file exists.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-1" data-step="1">
+      <div class="task-head">
+        <span class="step-dot">1</span>
+        <h3>Create your repository on GitHub</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="1">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Have a remote home for your CV waiting before you touch a terminal.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A new, empty repository exists on your GitHub account — name it something like <code>my-cv</code></li>
+            <li>No README, <code>.gitignore</code>, or license was added at creation</li>
+            <li>You have copied its HTTPS clone URL</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-1">Reveal the steps</button>
+      <div class="reveal-panel" id="reveal-1" hidden>
+        <p class="reveal-label">Do this</p>
+        <ol class="reveal-steps">
+          <li>Go to <code>github.com/new</code> in your browser</li>
+          <li>Name it <code>my-cv</code> (or anything personal — it's your repo)</li>
+          <li>Leave every checkbox unchecked — keep it empty</li>
+          <li>Click <strong>Create repository</strong>, then copy the HTTPS URL from the green <strong>Code</strong> button</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-2" data-step="2">
+      <div class="task-head">
+        <span class="step-dot">2</span>
+        <h3>Clone it with your token</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="2">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn the empty remote repository into a connected local folder — authenticated from the very first command.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>You have a classic Personal Access Token (repo scope) copied and ready</li>
+            <li>A local folder exists on your machine, connected to your GitHub repo as <code>origin</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-2">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-2" hidden>
+        <p class="reveal-label">Swap in your own username, token, and repo name</p>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git clone https://&lt;username&gt;:&lt;token&gt;@github.com/&lt;username&gt;/my-cv.git
+cd my-cv</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-3" data-step="3">
+      <div class="task-head">
+        <span class="step-dot">3</span>
+        <h3>Create your starter files</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="3">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Set up the three files this whole project lives in, plus a README to describe it.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>index.html</code>, <code>styles.css</code>, <code>script.js</code>, and <code>README.md</code> all exist in the folder</li>
+            <li>Listing the folder's contents shows all four files</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-3">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-3" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>touch index.html styles.css script.js README.md
+ls -la</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-4" data-step="4">
+      <div class="task-head">
+        <span class="step-dot">4</span>
+        <h3>Write a one-line README</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="4">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get in the habit of describing a project before you build it — even in one sentence.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>README.md</code> contains at least a title and one sentence describing the project</li>
+            <li><code>cat README.md</code> prints what you wrote</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-4">Reveal how</button>
+      <div class="reveal-panel" id="reveal-4" hidden>
+        <ol class="reveal-steps">
+          <li>Open <code>README.md</code> in VS Code</li>
+          <li>Type something like: <code># My CV</code> on the first line, then <code>A personal CV site, built one commit at a time.</code> on the next</li>
+          <li>Save, then confirm with <code>cat README.md</code> in the terminal</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-5" data-step="5">
+      <div class="task-head">
+        <span class="step-dot">5</span>
+        <h3>First commit and push</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="5">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get your very first snapshot onto GitHub before any real content exists.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows exactly one commit</li>
+            <li>Refreshing your repository page on GitHub shows all four files</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-5">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-5" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add .
+git commit -m "initial project structure"
+git push origin main</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 2 ============ -->
+  <section class="phase" id="phase-2" data-phase="2">
+    <div class="phase-heading">
+      <span class="phase-index">02</span>
+      <div>
+        <h2>HTML Skeleton</h2>
+        <p class="phase-intro">The full shape of the page, before a word of real content exists.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-6" data-step="6">
+      <div class="task-head">
+        <span class="step-dot">6</span>
+        <h3>Ask AI for the page skeleton</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="6">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get the full structure in place first — sections as empty placeholders you'll fill in one at a time.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>index.html</code> has a header with your name and a title/tagline</li>
+            <li>Empty sections exist for About, Experience, Education, Skills, and Contact</li>
+            <li><code>index.html</code> links to <code>styles.css</code> and <code>script.js</code></li>
+            <li>Opening the file in a browser shows a plain but complete page structure</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-6">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-6" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Create a basic index.html for a personal CV site. Include a header with my name and a short tagline, and empty section elements with headings for About, Experience, Education, Skills, and Contact. Link a styles.css and a script.js file. No content in the sections yet — just the structure."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-7" data-step="7">
+      <div class="task-head">
+        <span class="step-dot">7</span>
+        <h3>Commit the skeleton</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="7">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this structural milestone before adding any real content.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning the page skeleton</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-7">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-7" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add index.html
+git commit -m "add page skeleton"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 3 ============ -->
+  <section class="phase" id="phase-3" data-phase="3">
+    <div class="phase-heading">
+      <span class="phase-index">03</span>
+      <div>
+        <h2>About &amp; Photo</h2>
+        <p class="phase-intro">Your first real content — and your first non-text file in Git.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-8" data-step="8">
+      <div class="task-head">
+        <span class="step-dot">8</span>
+        <h3>Ask AI to fill in About Me</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="8">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn the empty About section into a short, real introduction — written by you, formatted by AI.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>The About section has 2–4 sentences describing who you are</li>
+            <li>It reads like <em>you</em>, not a generic placeholder</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-8">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-8" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"In the About section of my index.html, add a short paragraph introducing me: [tell it 2–3 real facts about yourself — what you're studying, what you're curious about, one thing you enjoy]. Keep the tone simple and human, not corporate."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-9" data-step="9">
+      <div class="task-head">
+        <span class="step-dot">9</span>
+        <h3>Add your profile photo</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="9">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get a real personal asset into the project, and see that Git tracks images exactly like text files.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A photo file (e.g. <code>photo.jpg</code>) sits in the project folder</li>
+            <li>The About section displays it when you open <code>index.html</code> in a browser</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-9">Reveal how</button>
+      <div class="reveal-panel" id="reveal-9" hidden>
+        <ol class="reveal-steps">
+          <li>Save or drag a photo of yourself into the project folder, named <code>photo.jpg</code></li>
+        </ol>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Then say this to your AI assistant</p>
+          <p class="prompt-text">"Add an img tag in the About section that displays photo.jpg, sized and styled like a small profile picture."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-10" data-step="10">
+      <div class="task-head">
+        <span class="step-dot">10</span>
+        <h3>Commit About and your photo</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="10">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save your first real content — text and an image — together in one commit.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit that includes <code>photo.jpg</code></li>
+            <li>GitHub shows the photo file in your repository</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-10">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-10" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add .
+git commit -m "add about section and profile photo"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 4 ============ -->
+  <section class="phase" id="phase-4" data-phase="4">
+    <div class="phase-heading">
+      <span class="phase-index">04</span>
+      <div>
+        <h2>Experience &amp; Education</h2>
+        <p class="phase-intro">Two sections, one prompt, one commit.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-11" data-step="11">
+      <div class="task-head">
+        <span class="step-dot">11</span>
+        <h3>Ask AI to fill in both sections</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="11">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Bundle two related sections into a single prompt — real workflows batch small, related changes together.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>The Experience section lists at least one role, job, or project</li>
+            <li>The Education section lists your school and field of study</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-11">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-11" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Fill in the Experience section with [describe a job, internship, or project — even a small one] and the Education section with [your school and what you're studying]. Use short, readable list items, not paragraphs."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-12" data-step="12">
+      <div class="task-head">
+        <span class="step-dot">12</span>
+        <h3>Commit Experience and Education</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="12">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save both sections in a single, clearly-labeled commit.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning experience and education</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-12">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-12" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add index.html
+git commit -m "add experience and education sections"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 5 ============ -->
+  <section class="phase" id="phase-5" data-phase="5">
+    <div class="phase-heading">
+      <span class="phase-index">05</span>
+      <div>
+        <h2>Skills &amp; Contact</h2>
+        <p class="phase-intro">The last two content sections — same bundled pattern.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-13" data-step="13">
+      <div class="task-head">
+        <span class="step-dot">13</span>
+        <h3>Ask AI to fill in both sections</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="13">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Finish the content of the page — what you can do, and how to reach you.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>The Skills section lists at least 4–5 concrete skills</li>
+            <li>The Contact section shows at least an email address, and optionally GitHub/LinkedIn links</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-13">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-13" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Fill in the Skills section with a list of [your real skills — languages, tools, soft skills]. Fill in the Contact section with my email [your email] and links to my GitHub and LinkedIn if I have them."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-14" data-step="14">
+      <div class="task-head">
+        <span class="step-dot">14</span>
+        <h3>Commit Skills and Contact</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="14">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the final content commit — the page is now complete, just unstyled.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning skills and contact</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-14">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-14" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add index.html
+git commit -m "add skills and contact sections"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 6 ============ -->
+  <section class="phase" id="phase-6" data-phase="6">
+    <div class="phase-heading">
+      <span class="phase-index">06</span>
+      <div>
+        <h2>Style Pass</h2>
+        <p class="phase-intro">One prompt to make it look like a real site instead of a document.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-15" data-step="15">
+      <div class="task-head">
+        <span class="step-dot">15</span>
+        <h3>Ask AI for a full style pass</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="15">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn the plain HTML into something that looks intentional — layout, type, color, and a nicer photo, all at once.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>styles.css</code> has real typography, spacing, and a color scheme</li>
+            <li>Sections are clearly separated and easy to scan</li>
+            <li>Your photo is styled — circular or rounded, with a border or shadow</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-15">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-15" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a full styles.css for my CV site. Give it a simple reset, nice readable typography, comfortable spacing between sections, and a cohesive color scheme — pick 2–3 colors that work well together. Style the profile photo to be circular with a subtle border or shadow. Keep it clean, not flashy."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-16" data-step="16">
+      <div class="task-head">
+        <span class="step-dot">16</span>
+        <h3>Commit the style pass</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="16">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this milestone — the site now looks finished, not just functional.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning styling</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-16">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-16" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add styles.css
+git commit -m "style the CV: layout, type, color, photo"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 7 ============ -->
+  <section class="phase" id="phase-7" data-phase="7">
+    <div class="phase-heading">
+      <span class="phase-index">07</span>
+      <div>
+        <h2>Deploy &amp; Wrap-up</h2>
+        <p class="phase-intro">Ship it — using the exact same skill you'll use for every project after this one.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-17" data-step="17">
+      <div class="task-head">
+        <span class="step-dot">17</span>
+        <h3>Enable GitHub Pages</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="17">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn your repository into a live, public website with no extra hosting setup.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Your repository's Pages settings show a green "Your site is live at..." banner</li>
+            <li>Opening that link shows your actual CV, styled and working</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-17">Reveal how</button>
+      <div class="reveal-panel" id="reveal-17" hidden>
+        <ol class="reveal-steps">
+          <li>On GitHub, open your repository's <strong>Settings</strong> tab</li>
+          <li>Go to <strong>Pages</strong> in the left sidebar</li>
+          <li>Under "Build and deployment," choose <strong>Deploy from a branch</strong></li>
+          <li>Set branch to <code>main</code> and folder to <code>/ (root)</code>, then Save</li>
+          <li>Wait about a minute, then refresh the page for your live link</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-18" data-step="18">
+      <div class="task-head">
+        <span class="step-dot">18</span>
+        <h3>Tag the milestone and view your history</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="18">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Mark this working version, then look back at the whole build as one ordered history.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git tag</code> lists <code>v1.0</code></li>
+            <li><code>git log --oneline</code> shows every commit from this session, in order</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-18">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-18" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git tag v1.0
+git push --tags
+git log --oneline</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card closing-card" id="step-19" data-step="19">
+      <div class="task-head">
+        <span class="step-dot">19</span>
+        <h3>Look at what you built</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="19">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Open your live link and look at it — a real personal site, built by you, deployed by you, with a full Git history behind it. This page you're reading right now was built and deployed exactly the same way. Keep the repo — nothing stops you from improving this CV all year.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ STRETCH ============ -->
+  <section class="phase stretch-section" id="stretch" data-phase="stretch">
+    <div class="phase-heading stretch-heading">
+      <span class="phase-index">★</span>
+      <div>
+        <h2>Stretch Tasks <span class="optional-badge">Optional</span></h2>
+        <p class="phase-intro">Finished early? Pick 2–3 of these — each is its own small prompt and commit.</p>
+        <p class="stretch-progress"><span id="stretch-count">0</span> / 6 stretch steps done</p>
+      </div>
+    </div>
+
+    <article class="task-card stretch-card" id="step-20" data-step="20">
+      <div class="task-head">
+        <span class="step-dot">A</span>
+        <h3>Ask AI for a dark/light mode toggle</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="20">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Add your first real interactivity — a button that changes the whole page's look.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A visible button or switch toggles between a light and dark color scheme</li>
+            <li>The choice applies instantly, no page reload</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-20">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-20" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a dark/light mode toggle button to my CV site. Use CSS variables for the colors and JavaScript to switch a class on the body when the button is clicked."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-21" data-step="21">
+      <div class="task-head">
+        <span class="step-dot">A</span>
+        <h3>Commit the toggle</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="21">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the feature.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning dark mode</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-21">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-21" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add .
+git commit -m "add dark/light mode toggle"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-22" data-step="22">
+      <div class="task-head">
+        <span class="step-dot">B</span>
+        <h3>Ask AI to make it responsive</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="22">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Make sure the site holds up on a phone screen, not just your laptop.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Shrinking the browser window narrow still shows a readable, non-broken layout</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-22">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-22" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a media query to my styles.css so the CV layout adapts cleanly to narrow, mobile-width screens."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-23" data-step="23">
+      <div class="task-head">
+        <span class="step-dot">B</span>
+        <h3>Commit the responsive pass</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="23">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the feature.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning responsiveness</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-23">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-23" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add styles.css
+git commit -m "make layout responsive"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-24" data-step="24">
+      <div class="task-head">
+        <span class="step-dot">C</span>
+        <h3>Ask AI for a small polish touch</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="24">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Add one small detail that makes the site feel finished.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Pick one: a hover/scroll animation, or a "Download CV as PDF" link</li>
+            <li>The detail works when you try it in the browser</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-24">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-24" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a subtle hover effect on my navigation links, and a small fade-in animation as each section scrolls into view." — or — "Add a 'Download as PDF' link that opens the browser's print dialog so I can save this page as a PDF."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-25" data-step="25">
+      <div class="task-head">
+        <span class="step-dot">C</span>
+        <h3>Commit the final touch</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="25">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save it, and take a moment to look at the finished repo history.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log --oneline</code> shows the full story of your build, end to end</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-25">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-25" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add .
+git commit -m "final polish"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="closing-footer">
+  <p>Your Personal CV · built one commit at a time · Holberton School Summer Program</p>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
