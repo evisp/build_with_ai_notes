@@ -5,7 +5,7 @@
    the left edge connecting every step, because the content really is one.
    ========================================================================== */
 
-   
+
 :root {
   /* --- Brand primaries --- */
   --midnight:      #14133F;
@@ -514,7 +514,7 @@ button { font-family: inherit; }
   * { transition: none !important; }
 }
 
-/* ---------- Persistent site sidebar ---------- */
+/* ---------- Collapsable site sidebar ---------- */
 .site-sidebar {
   position: fixed;
   top: 0;
@@ -524,9 +524,10 @@ button { font-family: inherit; }
   overflow-y: auto;
   background: var(--midnight);
   color: var(--ice);
-  padding: 28px 22px 40px;
+  padding: 72px 22px 40px;
   z-index: 50;
   border-right: 1px solid rgba(242, 241, 235, 0.08);
+  transition: transform 0.25s ease;
 }
 .sidebar-brand {
   display: block;
@@ -583,7 +584,7 @@ button { font-family: inherit; }
 }
 
 .sidebar-toggle {
-  display: none;
+  display: flex;
   position: fixed;
   top: 14px;
   left: 14px;
@@ -615,16 +616,14 @@ button { font-family: inherit; }
 }
 
 @media (min-width: 901px) {
-  body { padding-left: 260px; }
+  body { padding-left: 260px; transition: padding-left 0.25s ease; }
+  body.sidebar-collapsed { padding-left: 0; }
+  body.sidebar-collapsed .site-sidebar { transform: translateX(-100%); }
 }
 
 @media (max-width: 900px) {
   body { padding-left: 0; }
-  .site-sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-  }
+  .site-sidebar { transform: translateX(-100%); }
   .site-sidebar.is-open { transform: translateX(0); }
-  .sidebar-toggle { display: flex; }
   .sidebar-overlay.is-open { display: block; }
 }

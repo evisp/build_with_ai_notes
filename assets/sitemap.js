@@ -109,6 +109,13 @@
 
     body.insertAdjacentHTML("afterbegin", buildSidebarHTML(prefix, currentKey));
 
+    try {
+      if (window.matchMedia("(min-width: 901px)").matches &&
+          localStorage.getItem("bwai-sidebar-collapsed") === "1") {
+        body.classList.add("sidebar-collapsed");
+      }
+    } catch (e) {}
+
     var toggle = document.getElementById("sidebar-toggle");
     var overlay = document.getElementById("sidebar-overlay");
     var sidebar = document.getElementById("site-sidebar");
@@ -125,8 +132,15 @@
     }
 
     toggle.addEventListener("click", function () {
-      var isOpen = sidebar.classList.contains("is-open");
-      if (isOpen) { closeSidebar(); } else { openSidebar(); }
+      var isMobile = window.matchMedia("(max-width: 900px)").matches;
+      if (isMobile) {
+        var isOpen = sidebar.classList.contains("is-open");
+        if (isOpen) { closeSidebar(); } else { openSidebar(); }
+      } else {
+        var collapsed = body.classList.toggle("sidebar-collapsed");
+        toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+        try { localStorage.setItem("bwai-sidebar-collapsed", collapsed ? "1" : "0"); } catch (e) {}
+      }
     });
     overlay.addEventListener("click", closeSidebar);
     document.addEventListener("keydown", function (e) {
