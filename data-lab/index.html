@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tirana Apartment Scout — Data Edition</title>
+<meta name="description" content="A 1.5-hour build-along: folder structure, virtual environments, pip installs, and pandas + matplotlib on fake apartment data — Holberton summer school.">
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="470" cy="140" r="60"></circle>
+    <circle cx="470" cy="140" r="110"></circle>
+    <circle cx="470" cy="140" r="165"></circle>
+    <circle cx="470" cy="140" r="225"></circle>
+  </svg>
+
+  <div class="hero-content">
+    <p class="eyebrow">Holberton Summer School · Data Edition</p>
+    <h1>Tirana Apartment Scout: Data Edition</h1>
+    <p class="hero-sub">Folder structure, virtual environments, and your first pandas + matplotlib workflow — on the same apartment data, one commit at a time.</p>
+
+    <div class="hero-note">
+      <p><strong>How this page works —</strong> every step gives you a <em>goal</em> and a <em>requirement</em>, never the command itself. Try it from memory first. Only tap <strong>Reveal</strong> when you're stuck.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="phase-nav" aria-label="Phase navigation">
+  <a href="#phase-1"><span class="nav-index">01</span>Create &amp; Clone</a>
+  <a href="#phase-2"><span class="nav-index">02</span>Folder Structure</a>
+  <a href="#phase-3"><span class="nav-index">03</span>Virtual Env</a>
+  <a href="#phase-4"><span class="nav-index">04</span>Install Libraries</a>
+  <a href="#phase-5"><span class="nav-index">05</span>Generate Data</a>
+  <a href="#phase-6"><span class="nav-index">06</span>Explore</a>
+  <a href="#phase-7"><span class="nav-index">07</span>Analyze</a>
+  <a href="#phase-8"><span class="nav-index">08</span>Visualize</a>
+  <a href="#phase-9"><span class="nav-index">09</span>Wrap-up</a>
+  <a href="#stretch"><span class="nav-index">★</span>Stretch</a>
+</nav>
+
+<div class="progress-bar" role="group" aria-label="Session progress">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <p class="progress-label"><span id="progress-count">0</span> / 23 steps committed</p>
+</div>
+
+<main class="build-log">
+
+  <!-- ============ PHASE 1 ============ -->
+  <section class="phase" id="phase-1" data-phase="1">
+    <div class="phase-heading">
+      <span class="phase-index">01</span>
+      <div>
+        <h2>Create &amp; Clone</h2>
+        <p class="phase-intro">Quick review of week one — a fresh repo for a fresh project.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-1" data-step="1">
+      <div class="task-head">
+        <span class="step-dot">1</span>
+        <h3>Create your repository on GitHub</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="1">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Have a remote home for this new project before touching a terminal.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A new, empty repository exists — name it something like <code>tirana-data-lab</code></li>
+            <li>No README, <code>.gitignore</code>, or license was added at creation</li>
+            <li>You have copied its HTTPS clone URL</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-1">Reveal the steps</button>
+      <div class="reveal-panel" id="reveal-1" hidden>
+        <p class="reveal-label">Do this</p>
+        <ol class="reveal-steps">
+          <li>Go to <code>github.com/new</code></li>
+          <li>Name it <code>tirana-data-lab</code></li>
+          <li>Leave every checkbox unchecked — keep it empty</li>
+          <li>Click <strong>Create repository</strong>, then copy the HTTPS URL from the green <strong>Code</strong> button</li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-2" data-step="2">
+      <div class="task-head">
+        <span class="step-dot">2</span>
+        <h3>Clone it with your token</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="2">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get a connected local folder, authenticated from the first command.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>You have a classic Personal Access Token (repo scope) ready</li>
+            <li>A local folder exists, connected to your repo as <code>origin</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-2">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-2" hidden>
+        <p class="reveal-label">Swap in your own username, token, and repo name</p>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git clone https://&lt;username&gt;:&lt;token&gt;@github.com/&lt;username&gt;/tirana-data-lab.git
+cd tirana-data-lab</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-3" data-step="3">
+      <div class="task-head">
+        <span class="step-dot">3</span>
+        <h3>Add a README and make your first commit</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="3">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Start with a one-line description and a clean first snapshot.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>README.md</code> has a title and one sentence describing the project</li>
+            <li><code>git log</code> shows one commit, pushed to GitHub</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-3">Reveal how</button>
+      <div class="reveal-panel" id="reveal-3" hidden>
+        <ol class="reveal-steps">
+          <li><code>touch README.md</code>, then open it and add a title plus one sentence</li>
+        </ol>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add .
+git commit -m "initial commit"
+git push origin main</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 2 ============ -->
+  <section class="phase" id="phase-2" data-phase="2">
+    <div class="phase-heading">
+      <span class="phase-index">02</span>
+      <div>
+        <h2>Folder Structure</h2>
+        <p class="phase-intro">Separate raw data, code, and generated results — a convention you'll see in every real project from here on.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-4" data-step="4">
+      <div class="task-head">
+        <span class="step-dot">4</span>
+        <h3>Create your project folders</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="4">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Set up three folders that keep raw data, scripts, and generated output cleanly separated.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>data/</code>, <code>scripts/</code>, and <code>output/</code> all exist at the project root</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-4">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-4" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>mkdir data scripts output
+ls -la</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-5" data-step="5">
+      <div class="task-head">
+        <span class="step-dot">5</span>
+        <h3>Make Git track your empty folders</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="5">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Git never tracks empty folders — a small placeholder file is the standard trick to make a folder structure show up on GitHub immediately.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Each of <code>data/</code>, <code>scripts/</code>, and <code>output/</code> contains a <code>.gitkeep</code> file</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-5">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-5" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>touch data/.gitkeep scripts/.gitkeep output/.gitkeep</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-6" data-step="6">
+      <div class="task-head">
+        <span class="step-dot">6</span>
+        <h3>Commit your project structure</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="6">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the folder layout, and start a <code>.gitignore</code> you'll build on in the next phase.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>.gitignore</code> exists at the project root</li>
+            <li>GitHub shows the <code>data/</code>, <code>scripts/</code>, and <code>output/</code> folders</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-6">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-6" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>touch .gitignore
+git add .
+git commit -m "add project folder structure"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 3 ============ -->
+  <section class="phase" id="phase-3" data-phase="3">
+    <div class="phase-heading">
+      <span class="phase-index">03</span>
+      <div>
+        <h2>Virtual Environment</h2>
+        <p class="phase-intro">Give this project its own isolated Python — separate from your system and every other project.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-7" data-step="7">
+      <div class="task-head">
+        <span class="step-dot">7</span>
+        <h3>Create a virtual environment</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="7">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Create an isolated Python environment that lives entirely inside this project folder.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>A <code>venv/</code> folder now exists at the project root</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-7">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-7" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 -m venv venv</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-8" data-step="8">
+      <div class="task-head">
+        <span class="step-dot">8</span>
+        <h3>Activate it and confirm it's active</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="8">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Make sure every install from here on lands inside this project's environment, not your system Python.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Your terminal prompt now shows <code>(venv)</code> at the start of the line</li>
+            <li><code>which python</code> points to a path inside your <code>venv</code> folder</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-8">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-8" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>source venv/bin/activate
+which python</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-9" data-step="9">
+      <div class="task-head">
+        <span class="step-dot">9</span>
+        <h3>Ignore your virtual environment in Git</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="9">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>A <code>venv</code> folder is large and machine-specific — it should never be committed.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>.gitignore</code> contains a line with <code>venv/</code></li>
+            <li><code>git status</code> no longer lists anything inside <code>venv/</code> as untracked</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-9">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-9" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>echo "venv/" >> .gitignore
+git add .gitignore
+git commit -m "ignore virtual environment"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 4 ============ -->
+  <section class="phase" id="phase-4" data-phase="4">
+    <div class="phase-heading">
+      <span class="phase-index">04</span>
+      <div>
+        <h2>Install Libraries</h2>
+        <p class="phase-intro">Add the two libraries this whole session depends on.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-10" data-step="10">
+      <div class="task-head">
+        <span class="step-dot">10</span>
+        <h3>Install pandas and matplotlib</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="10">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Install the two data libraries — inside your virtual environment, not system-wide.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>(venv)</code> is still showing in your prompt</li>
+            <li><code>pip show pandas</code> and <code>pip show matplotlib</code> both return version info</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-10">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-10" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>pip install pandas matplotlib</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-11" data-step="11">
+      <div class="task-head">
+        <span class="step-dot">11</span>
+        <h3>Freeze your dependencies</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="11">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Record exactly what's installed, so anyone — including future you — can recreate this environment.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>requirements.txt</code> exists and lists pandas and matplotlib with version numbers</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-11">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-11" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>pip freeze > requirements.txt
+cat requirements.txt</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-12" data-step="12">
+      <div class="task-head">
+        <span class="step-dot">12</span>
+        <h3>Commit requirements.txt</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="12">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the dependency list — never the <code>venv</code> folder itself.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>GitHub shows <code>requirements.txt</code>, but no <code>venv</code> folder</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-12">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-12" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add requirements.txt
+git commit -m "add project dependencies"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 5 ============ -->
+  <section class="phase" id="phase-5" data-phase="5">
+    <div class="phase-heading">
+      <span class="phase-index">05</span>
+      <div>
+        <h2>Generate Fake Data</h2>
+        <p class="phase-intro">A real data file in <code>data/</code>, written by AI, run by you.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-13" data-step="13">
+      <div class="task-head">
+        <span class="step-dot">13</span>
+        <h3>Ask AI to generate the fake dataset</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="13">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get a realistic-looking CSV of fake apartments saved into <code>data/</code>.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>scripts/generate_data.py</code> exists</li>
+            <li>Running it creates <code>data/apartments.csv</code> with at least 30 rows</li>
+            <li>Columns include at least price, sqm, and bedrooms</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-13">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-13" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python script that generates 40 fake Tirana apartment listings with columns: price (in EUR), sqm, bedrooms, bathrooms, floor, and neighborhood. Save it as data/apartments.csv using pandas. Print a confirmation message with the number of rows saved."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/generate_data.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-14" data-step="14">
+      <div class="task-head">
+        <span class="step-dot">14</span>
+        <h3>Commit the data and the script</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="14">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save both the code that generated the data and the data itself.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit including both files</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-14">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-14" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/generate_data.py data/apartments.csv
+git commit -m "generate fake apartment dataset"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 6 ============ -->
+  <section class="phase" id="phase-6" data-phase="6">
+    <div class="phase-heading">
+      <span class="phase-index">06</span>
+      <div>
+        <h2>Explore with Pandas</h2>
+        <p class="phase-intro">Your first real look at the dataset — shape, types, and summary statistics.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-15" data-step="15">
+      <div class="task-head">
+        <span class="step-dot">15</span>
+        <h3>Ask AI to load and explore the data</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="15">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Load the CSV into a DataFrame and get a first honest look at it.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>scripts/explore.py</code> exists</li>
+            <li>Running it prints the first rows, column info, and summary statistics with no errors</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-15">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-15" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python script scripts/explore.py that loads data/apartments.csv with pandas and prints df.head(), df.info(), and df.describe()."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/explore.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-16" data-step="16">
+      <div class="task-head">
+        <span class="step-dot">16</span>
+        <h3>Commit the exploration script</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="16">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this checkpoint.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning exploration</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-16">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-16" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/explore.py
+git commit -m "add data exploration script"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 7 ============ -->
+  <section class="phase" id="phase-7" data-phase="7">
+    <div class="phase-heading">
+      <span class="phase-index">07</span>
+      <div>
+        <h2>Process &amp; Analyze</h2>
+        <p class="phase-intro">Turn raw numbers into something meaningful — a callback to week one's deal scoring.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-17" data-step="17">
+      <div class="task-head">
+        <span class="step-dot">17</span>
+        <h3>Ask AI to process and analyze</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="17">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Compute price per square meter and find out which listings are the best value.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>scripts/analyze.py</code> adds a <code>price_per_sqm</code> column</li>
+            <li>It prints average price grouped by bedroom count</li>
+            <li>It prints the 3 listings with the lowest price per sqm</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-17">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-17" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python script scripts/analyze.py that loads data/apartments.csv with pandas, adds a price_per_sqm column, prints the average price grouped by number of bedrooms, and prints the 3 listings with the lowest price_per_sqm as the best deals."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/analyze.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-18" data-step="18">
+      <div class="task-head">
+        <span class="step-dot">18</span>
+        <h3>Commit the analysis script</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="18">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this checkpoint.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning price analysis</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-18">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-18" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/analyze.py
+git commit -m "add price analysis"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 8 ============ -->
+  <section class="phase" id="phase-8" data-phase="8">
+    <div class="phase-heading">
+      <span class="phase-index">08</span>
+      <div>
+        <h2>Visualize</h2>
+        <p class="phase-intro">Turn the analysis into two real charts, saved as files in <code>output/</code>.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-19" data-step="19">
+      <div class="task-head">
+        <span class="step-dot">19</span>
+        <h3>Ask AI to visualize the data</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="19">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Create real chart files you can open and look at anytime.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>output/price_distribution.png</code> exists (a histogram)</li>
+            <li><code>output/avg_price_by_bedrooms.png</code> exists (a bar chart)</li>
+            <li>Both files open and look correct</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-19">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-19" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python script scripts/visualize.py that loads data/apartments.csv with pandas, then uses matplotlib to create a histogram of prices saved to output/price_distribution.png, and a bar chart of average price grouped by bedroom count saved to output/avg_price_by_bedrooms.png."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/visualize.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-20" data-step="20">
+      <div class="task-head">
+        <span class="step-dot">20</span>
+        <h3>Commit your charts</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="20">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the visualizations alongside the code that made them.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>GitHub shows both PNG files inside <code>output/</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-20">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-20" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/visualize.py output/
+git commit -m "add price visualizations"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 9 ============ -->
+  <section class="phase" id="phase-9" data-phase="9">
+    <div class="phase-heading">
+      <span class="phase-index">09</span>
+      <div>
+        <h2>Wrap-up</h2>
+        <p class="phase-intro">Look at the whole organized project, and everything it took to build it.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-21" data-step="21">
+      <div class="task-head">
+        <span class="step-dot">21</span>
+        <h3>Look at your final folder structure</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="21">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See the organized project you just built, all at once.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>You can see <code>data/</code>, <code>scripts/</code>, <code>output/</code>, <code>requirements.txt</code>, and <code>README.md</code> — with <code>venv/</code> clearly a separate, environment-only folder</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-21">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-21" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>ls -R</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-22" data-step="22">
+      <div class="task-head">
+        <span class="step-dot">22</span>
+        <h3>Tag this milestone and view your history</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="22">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Mark this working version, then look back at every commit from this session, in order.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git tag</code> lists <code>v1.0</code></li>
+            <li><code>git log --oneline</code> shows the full session as one ordered history</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-22">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-22" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git tag v1.0
+git push --tags
+git log --oneline</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card closing-card" id="step-23" data-step="23">
+      <div class="task-head">
+        <span class="step-dot">23</span>
+        <h3>Look at what you built</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="23">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>You just organized a real project, created an isolated environment, installed real data-science libraries, and used pandas and matplotlib to go from a raw CSV to actual charts. This exact shape — <code>data/</code>, <code>scripts/</code>, <code>output/</code>, a virtual environment, a <code>requirements.txt</code> — is the same structure behind <em>Tirana Deal Finder</em>, just at a much bigger scale.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ STRETCH ============ -->
+  <section class="phase stretch-section" id="stretch" data-phase="stretch">
+    <div class="phase-heading stretch-heading">
+      <span class="phase-index">★</span>
+      <div>
+        <h2>Stretch Tasks <span class="optional-badge">Optional</span></h2>
+        <p class="phase-intro">Finished early? Pick 2–3 of these — each is its own small prompt and commit.</p>
+        <p class="stretch-progress"><span id="stretch-count">0</span> / 6 stretch steps done</p>
+      </div>
+    </div>
+
+    <article class="task-card stretch-card" id="step-24" data-step="24">
+      <div class="task-head">
+        <span class="step-dot">A</span>
+        <h3>Ask AI for a scatter plot</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="24">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See the relationship between size and price at a glance.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>output/price_vs_sqm.png</code> exists and shows a scatter plot</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-24">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-24" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a scatter plot of price vs sqm to scripts/visualize.py, saved as output/price_vs_sqm.png."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-25" data-step="25">
+      <div class="task-head">
+        <span class="step-dot">A</span>
+        <h3>Commit the scatter plot</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="25">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the feature.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning the scatter plot</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-25">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-25" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/visualize.py output/price_vs_sqm.png
+git commit -m "add price vs sqm scatter plot"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-26" data-step="26">
+      <div class="task-head">
+        <span class="step-dot">B</span>
+        <h3>Ask AI for a boxplot</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="26">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See how price spreads out within each bedroom count, not just the average.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>output/price_by_bedrooms_boxplot.png</code> exists</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-26">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-26" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a boxplot of price grouped by bedroom count to scripts/visualize.py, saved as output/price_by_bedrooms_boxplot.png."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-27" data-step="27">
+      <div class="task-head">
+        <span class="step-dot">B</span>
+        <h3>Commit the boxplot</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="27">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the feature.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning the boxplot</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-27">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-27" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/visualize.py output/price_by_bedrooms_boxplot.png
+git commit -m "add price by bedrooms boxplot"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-28" data-step="28">
+      <div class="task-head">
+        <span class="step-dot">C</span>
+        <h3>Ask AI for a text summary report</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="28">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Turn your analysis into a short, human-readable report file.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>output/summary.txt</code> exists with total listings, average price, average sqm, and the best deal</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-28">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-28" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add code to scripts/analyze.py that writes a short summary report to output/summary.txt, including the total number of listings, the average price, the average sqm, and the single best-value listing."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-29" data-step="29">
+      <div class="task-head">
+        <span class="step-dot">C</span>
+        <h3>Commit the summary report</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="29">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save it, and take a moment to look at the finished project history.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log --oneline</code> shows the full story of your build, end to end</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-29">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-29" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/analyze.py output/summary.txt
+git commit -m "add summary report"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="closing-footer">
+  <p>Tirana Apartment Scout: Data Edition · built one commit at a time · Holberton School Summer Program</p>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
