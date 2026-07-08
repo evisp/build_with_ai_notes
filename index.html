@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build With AI — Course Roadmap</title>
+<meta name="description" content="Holberton Summer School — course roadmap: Fundamentals through Week 3, practice pages alongside the real Tirana Deal Finder build.">
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="470" cy="140" r="60"></circle>
+    <circle cx="470" cy="140" r="110"></circle>
+    <circle cx="470" cy="140" r="165"></circle>
+    <circle cx="470" cy="140" r="225"></circle>
+  </svg>
+
+  <div class="hero-content">
+    <p class="eyebrow">Holberton Summer School · Course Roadmap</p>
+    <h1>Build With AI</h1>
+    <p class="hero-sub">Small practice pages build the habit. The real project — <em>Tirana Deal Finder</em> — gets built together, live, session by session.</p>
+
+    <div class="hero-note">
+      <p><strong>How this site works —</strong> each week below has a couple of short practice pages, plus the matching real session where we build <em>Tirana Deal Finder</em> together in class. Solid cards are live now; dashed cards are coming as we build each week.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="phase-nav" aria-label="Roadmap navigation">
+  <a href="#fundamentals"><span class="nav-index">00</span>Fundamentals</a>
+  <a href="#week-1"><span class="nav-index">01</span>Week 1</a>
+  <a href="#week-2"><span class="nav-index">02</span>Week 2</a>
+  <a href="#week-3"><span class="nav-index">03</span>Week 3</a>
+</nav>
+
+<main class="build-log">
+
+  <!-- ============ FUNDAMENTALS ============ -->
+  <section class="phase" id="fundamentals" data-phase="fundamentals">
+    <div class="phase-heading">
+      <span class="phase-index">00</span>
+      <div>
+        <h2>Fundamentals</h2>
+        <p class="phase-intro">Terminal, Git, and your first AI-assisted builds. No real session maps to this one — it's pure practice.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="card-apartment-scout">
+      <div class="task-head">
+        <span class="step-dot">1</span>
+        <h3>Tirana Apartment Scout</h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Terminal basics, your first Git repo, and prompting AI to build a tiny CLI tool.</p>
+        </div>
+      </div>
+      <a class="reveal-btn" href="fundamentals/apartment-scout.html">Start →</a>
+    </article>
+
+    <article class="task-card" id="card-cv-project">
+      <div class="task-head">
+        <span class="step-dot">2</span>
+        <h3>Personal CV Build-Along</h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>A real, deployable site of your own — practicing the same prompt → run → commit → push loop.</p>
+        </div>
+      </div>
+      <a class="reveal-btn" href="fundamentals/cv-project.html">Start →</a>
+    </article>
+  </section>
+
+  <!-- ============ WEEK 1 ============ -->
+  <section class="phase" id="week-1" data-phase="week-1">
+    <div class="phase-heading">
+      <span class="phase-index">01</span>
+      <div>
+        <h2>Week 1 — Data &amp; Modeling</h2>
+        <p class="phase-intro">Primes <code>session-1</code> (clean dataset + EDA) and <code>session-2</code> (model + deal scorer) of Tirana Deal Finder.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="card-data-lab">
+      <div class="task-head">
+        <span class="step-dot">3</span>
+        <h3>Data Lab</h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Folder structure, virtual environments, and your first pandas + matplotlib workflow.</p>
+        </div>
+      </div>
+      <a class="reveal-btn" href="week-1/data-lab.html">Start →</a>
+    </article>
+
+    <article class="task-card stretch-card" id="card-model-basics">
+      <div class="task-head">
+        <span class="step-dot">4</span>
+        <h3>Model Basics <span class="optional-badge">Coming soon</span></h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Train a simple model on the fake apartment data and save it with <code>joblib</code> — priming session-2.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ WEEK 2 ============ -->
+  <section class="phase" id="week-2" data-phase="week-2">
+    <div class="phase-heading">
+      <span class="phase-index">02</span>
+      <div>
+        <h2>Week 2 — Flask App &amp; Analytics</h2>
+        <p class="phase-intro">Primes <code>session-3</code> (home page + deal badges) and <code>session-4</code> (analytics + price map).</p>
+      </div>
+    </div>
+
+    <article class="task-card stretch-card" id="card-flask-basics">
+      <div class="task-head">
+        <span class="step-dot">5</span>
+        <h3>Flask Basics <span class="optional-badge">Coming soon</span></h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Routes, templates, and running your first local dev server.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="card-charts-maps">
+      <div class="task-head">
+        <span class="step-dot">6</span>
+        <h3>Charts &amp; Maps <span class="optional-badge">Coming soon</span></h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Embed a chart in a webpage and drop pins on a Leaflet map.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ WEEK 3 ============ -->
+  <section class="phase" id="week-3" data-phase="week-3">
+    <div class="phase-heading">
+      <span class="phase-index">03</span>
+      <div>
+        <h2>Week 3 — AI Tools &amp; Chat</h2>
+        <p class="phase-intro">Primes <code>session-5</code> (functions → AI tools) and <code>session-6</code> (chat assistant in the app).</p>
+      </div>
+    </div>
+
+    <article class="task-card stretch-card" id="card-ai-tools">
+      <div class="task-head">
+        <span class="step-dot">7</span>
+        <h3>AI Tool Calling <span class="optional-badge">Coming soon</span></h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Call an LLM API and give it functions it can decide to use.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="card-chat-widget">
+      <div class="task-head">
+        <span class="step-dot">8</span>
+        <h3>Chat Widget <span class="optional-badge">Coming soon</span></h3>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <p>Build a small chat UI in JS and wire it to a backend route.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="closing-footer">
+  <p>Build With AI · Holberton School Summer Program</p>
+</footer>
+
+<script src="assets/script.js" defer></script>
+</body>
+</html>
