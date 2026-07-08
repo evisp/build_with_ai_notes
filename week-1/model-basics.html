@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Basics — Build With AI</title>
+<meta name="description" content="Train and save a simple linear regression model on fake apartment data — continuing the same repo as Data Lab.">
+<link rel="icon" href="data:,">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-rings" viewBox="0 0 600 600" aria-hidden="true">
+    <circle cx="470" cy="140" r="60"></circle>
+    <circle cx="470" cy="140" r="110"></circle>
+    <circle cx="470" cy="140" r="165"></circle>
+    <circle cx="470" cy="140" r="225"></circle>
+  </svg>
+
+  <div class="hero-content">
+    <p class="eyebrow">Holberton Summer School · Week 1</p>
+    <h1>Model Basics</h1>
+    <p class="hero-sub">Train a simple model on the data you already built, and save it so it never needs retraining.</p>
+
+    <div class="hero-note">
+      <p><strong>No new repo —</strong> this continues the exact same <code>tirana-practice</code> repo and virtual environment from Data Lab. If you haven't done Data Lab yet, do that first.</p>
+    </div>
+  </div>
+</header>
+
+<nav class="phase-nav" aria-label="Phase navigation">
+  <a href="#phase-1"><span class="nav-index">01</span>Pick Up Where You Left Off</a>
+  <a href="#phase-2"><span class="nav-index">02</span>Add Modeling Library</a>
+  <a href="#phase-3"><span class="nav-index">03</span>Make Room for a Model</a>
+  <a href="#phase-4"><span class="nav-index">04</span>Train</a>
+  <a href="#phase-5"><span class="nav-index">05</span>Save</a>
+  <a href="#phase-6"><span class="nav-index">06</span>Load &amp; Predict</a>
+  <a href="#phase-7"><span class="nav-index">07</span>Wrap-up</a>
+  <a href="#stretch"><span class="nav-index">★</span>Stretch</a>
+</nav>
+
+<div class="progress-bar" role="group" aria-label="Session progress">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <p class="progress-label"><span id="progress-count">0</span> / 15 steps committed</p>
+</div>
+
+<main class="build-log">
+
+  <!-- ============ PHASE 1 ============ -->
+  <section class="phase" id="phase-1" data-phase="1">
+    <div class="phase-heading">
+      <span class="phase-index">01</span>
+      <div>
+        <h2>Pick Up Where You Left Off</h2>
+        <p class="phase-intro">Same repo, same environment — just reactivated, not recreated.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-1" data-step="1">
+      <div class="task-head">
+        <span class="step-dot">1</span>
+        <h3>Reopen your project and activate your environment</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="1">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Get back into the exact same project and virtual environment from Data Lab — no new repo, no new venv.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>You're inside your <code>tirana-practice</code> folder</li>
+            <li>Your prompt shows <code>(venv)</code> again</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-1">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-1" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>cd tirana-practice
+source venv/bin/activate</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 2 ============ -->
+  <section class="phase" id="phase-2" data-phase="2">
+    <div class="phase-heading">
+      <span class="phase-index">02</span>
+      <div>
+        <h2>Add a Modeling Library</h2>
+        <p class="phase-intro">One new dependency, added the exact same way as pandas and matplotlib were.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-2" data-step="2">
+      <div class="task-head">
+        <span class="step-dot">2</span>
+        <h3>Install scikit-learn</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="2">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Add the machine learning library this session needs, inside your existing virtual environment.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>(venv)</code> is still showing in your prompt</li>
+            <li><code>pip show scikit-learn</code> returns version info</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-2">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-2" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>pip install scikit-learn</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-3" data-step="3">
+      <div class="task-head">
+        <span class="step-dot">3</span>
+        <h3>Update requirements.txt</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="3">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Keep your dependency list in sync with what's actually installed.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>requirements.txt</code> now also lists <code>scikit-learn</code> (and <code>joblib</code>, installed alongside it)</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-3">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-3" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>pip freeze > requirements.txt
+cat requirements.txt</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-4" data-step="4">
+      <div class="task-head">
+        <span class="step-dot">4</span>
+        <h3>Commit the new dependency</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="4">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this checkpoint before writing any modeling code.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning scikit-learn</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-4">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-4" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add requirements.txt
+git commit -m "add scikit-learn dependency"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 3 ============ -->
+  <section class="phase" id="phase-3" data-phase="3">
+    <div class="phase-heading">
+      <span class="phase-index">03</span>
+      <div>
+        <h2>Make Room for a Saved Model</h2>
+        <p class="phase-intro">The same <code>.gitkeep</code> trick from Data Lab, one folder further.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-5" data-step="5">
+      <div class="task-head">
+        <span class="step-dot">5</span>
+        <h3>Create a models/ folder</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="5">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Give trained models their own home, separate from data, scripts, and output.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>models/</code> exists at the project root</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-5">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-5" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>mkdir models</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-6" data-step="6">
+      <div class="task-head">
+        <span class="step-dot">6</span>
+        <h3>Make Git track it</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="6">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Same reason as Data Lab — Git won't track an empty folder without a placeholder file inside it.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>models/.gitkeep</code> exists</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-6">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-6" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>touch models/.gitkeep</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-7" data-step="7">
+      <div class="task-head">
+        <span class="step-dot">7</span>
+        <h3>Commit the new folder</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="7">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the structure before it holds anything.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>GitHub shows the <code>models/</code> folder</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-7">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-7" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add models/.gitkeep
+git commit -m "add models folder"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 4 ============ -->
+  <section class="phase" id="phase-4" data-phase="4">
+    <div class="phase-heading">
+      <span class="phase-index">04</span>
+      <div>
+        <h2>Train</h2>
+        <p class="phase-intro">Turn your cleaned apartment data into an actual predictive model.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-8" data-step="8">
+      <div class="task-head">
+        <span class="step-dot">8</span>
+        <h3>Ask AI to train a linear regression model</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="8">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See the full train/evaluate loop once, on data you already understand.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>scripts/train_model.py</code> exists</li>
+            <li>It splits the data into train and test sets, trains a <code>LinearRegression</code> model to predict price from sqm, bedrooms, bathrooms, and floor</li>
+            <li>Running it prints an R² score and mean absolute error on the test set</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-8">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-8" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python script scripts/train_model.py that loads data/apartments.csv with pandas, splits it into train and test sets using scikit-learn, trains a LinearRegression model to predict price from sqm, bedrooms, bathrooms, and floor, and prints the R² score and mean absolute error on the test set."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/train_model.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-9" data-step="9">
+      <div class="task-head">
+        <span class="step-dot">9</span>
+        <h3>Commit the training script</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="9">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this checkpoint.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning the model</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-9">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-9" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/train_model.py
+git commit -m "train a linear regression model"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 5 ============ -->
+  <section class="phase" id="phase-5" data-phase="5">
+    <div class="phase-heading">
+      <span class="phase-index">05</span>
+      <div>
+        <h2>Save</h2>
+        <p class="phase-intro">The same pattern <code>backend/model.py</code> will use in the real project.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-10" data-step="10">
+      <div class="task-head">
+        <span class="step-dot">10</span>
+        <h3>Ask AI to save the trained model</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="10">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Make the model reusable without retraining it every time.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li>Running <code>scripts/train_model.py</code> now also creates <code>models/price_model.joblib</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-10">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-10" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add code to scripts/train_model.py that saves the trained model to models/price_model.joblib using joblib.dump."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/train_model.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-11" data-step="11">
+      <div class="task-head">
+        <span class="step-dot">11</span>
+        <h3>Commit the saved model</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="11">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the model file itself, alongside the code that made it.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit including <code>models/price_model.joblib</code></li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-11">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-11" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/train_model.py models/price_model.joblib
+git commit -m "save trained model with joblib"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 6 ============ -->
+  <section class="phase" id="phase-6" data-phase="6">
+    <div class="phase-heading">
+      <span class="phase-index">06</span>
+      <div>
+        <h2>Load &amp; Predict</h2>
+        <p class="phase-intro">Prove the saved model actually works — without retraining it.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-12" data-step="12">
+      <div class="task-head">
+        <span class="step-dot">12</span>
+        <h3>Ask AI for a tiny prediction script</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="12">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Load the saved model back into a completely separate script and use it.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>scripts/predict.py</code> exists</li>
+            <li>Running it loads <code>models/price_model.joblib</code> and prints a predicted price for one made-up apartment</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-12">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-12" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Write a Python script scripts/predict.py that loads models/price_model.joblib with joblib.load, then predicts and prints the price for a made-up apartment with sqm=75, bedrooms=2, bathrooms=1, floor=3."</p>
+        </div>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>python3 scripts/predict.py</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card" id="step-13" data-step="13">
+      <div class="task-head">
+        <span class="step-dot">13</span>
+        <h3>Commit the prediction script</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="13">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save this checkpoint.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning prediction</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-13">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-13" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/predict.py
+git commit -m "add prediction script"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ PHASE 7 ============ -->
+  <section class="phase" id="phase-7" data-phase="7">
+    <div class="phase-heading">
+      <span class="phase-index">07</span>
+      <div>
+        <h2>Wrap-up</h2>
+        <p class="phase-intro">Mark the milestone, then look at the whole history — Data Lab included.</p>
+      </div>
+    </div>
+
+    <article class="task-card" id="step-14" data-step="14">
+      <div class="task-head">
+        <span class="step-dot">14</span>
+        <h3>Tag this milestone and view your history</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="14">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Mark this new milestone, then look back at every commit from both sessions, in order.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git tag</code> now lists both <code>v1.0</code> (from Data Lab) and <code>v1.1</code></li>
+            <li><code>git log --oneline</code> shows the full history of both sessions, back to back</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-14">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-14" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git tag v1.1
+git push --tags
+git log --oneline</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card closing-card" id="step-15" data-step="15">
+      <div class="task-head">
+        <span class="step-dot">15</span>
+        <h3>Look at what you built</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="15">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body single">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>You just trained and saved your first machine learning model — using the exact same repo, environment, and folder structure from Data Lab, just extended one step further. This train → evaluate → save → reload pattern is exactly what <code>backend/model.py</code> does in Tirana Deal Finder — you'll build that for real in session-2.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ STRETCH ============ -->
+  <section class="phase stretch-section" id="stretch" data-phase="stretch">
+    <div class="phase-heading stretch-heading">
+      <span class="phase-index">★</span>
+      <div>
+        <h2>Stretch Tasks <span class="optional-badge">Optional</span></h2>
+        <p class="phase-intro">Finished early? Try one or both.</p>
+        <p class="stretch-progress"><span id="stretch-count">0</span> / 4 stretch steps done</p>
+      </div>
+    </div>
+
+    <article class="task-card stretch-card" id="step-16" data-step="16">
+      <div class="task-head">
+        <span class="step-dot">A</span>
+        <h3>Ask AI to try a different model</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="16">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See whether a different algorithm beats plain linear regression.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>scripts/train_model.py</code> also trains a <code>RandomForestRegressor</code> and prints its R² alongside the linear regression score</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-16">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-16" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a RandomForestRegressor from scikit-learn to scripts/train_model.py, train it on the same data, and print its R² score next to the linear regression one for comparison."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-17" data-step="17">
+      <div class="task-head">
+        <span class="step-dot">A</span>
+        <h3>Commit the comparison</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="17">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save the feature.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log</code> shows a commit mentioning the comparison</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-17">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-17" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/train_model.py
+git commit -m "compare linear regression vs random forest"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-18" data-step="18">
+      <div class="task-head">
+        <span class="step-dot">B</span>
+        <h3>Ask AI for a predicted-vs-actual plot</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="18">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>See visually how close the model's predictions land to the real prices.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>output/predicted_vs_actual.png</code> exists</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-18">Reveal the prompt</button>
+      <div class="reveal-panel" id="reveal-18" hidden>
+        <div class="prompt-block">
+          <p class="prompt-kicker">Say this to your AI assistant</p>
+          <p class="prompt-text">"Add a scatter plot to scripts/train_model.py comparing actual vs predicted prices on the test set, saved to output/predicted_vs_actual.png."</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="task-card stretch-card" id="step-19" data-step="19">
+      <div class="task-head">
+        <span class="step-dot">B</span>
+        <h3>Commit the plot</h3>
+        <label class="done-toggle">
+          <input type="checkbox" class="done-checkbox" data-step="19">
+          <span>Done</span>
+        </label>
+      </div>
+      <div class="task-body">
+        <div class="task-goal">
+          <h4>Goal</h4>
+          <p>Save it, and take a look at the finished project history.</p>
+        </div>
+        <div class="task-reqs">
+          <h4>Requirements</h4>
+          <ul>
+            <li><code>git log --oneline</code> shows the full story of both sessions, end to end</li>
+          </ul>
+        </div>
+      </div>
+      <button class="reveal-btn" type="button" aria-expanded="false" aria-controls="reveal-19">Reveal the command</button>
+      <div class="reveal-panel" id="reveal-19" hidden>
+        <div class="term-window">
+          <div class="term-chrome"><span class="dot dot-a"></span><span class="dot dot-b"></span><span class="dot dot-c"></span></div>
+          <pre class="term-body"><code>git add scripts/train_model.py output/predicted_vs_actual.png
+git commit -m "add predicted vs actual plot"
+git push</code></pre>
+        </div>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="closing-footer">
+  <p>Model Basics · Build With AI · Holberton School Summer Program</p>
+</footer>
+
+<script src="../assets/script.js" defer></script>
+</body>
+</html>
