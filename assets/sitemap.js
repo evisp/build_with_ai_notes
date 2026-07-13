@@ -29,8 +29,7 @@
       hub: "week-2/index.html",
       pages: [
         { key: "week-2/flask-basics", title: "Flask Basics", url: "week-2/flask-basics.html", status: "live" },
-        { key: "week-2/charts-maps", title: "Charts & Maps", url: "week-2/charts-maps.html", status: "soon" }
-      ]
+        { key: "week-2/charts-maps", title: "Charts & Maps", url: "week-2/charts-maps.html", status: "live" }      ]
     },
     {
       title: "Week 3 — AI Tools & Chat",
